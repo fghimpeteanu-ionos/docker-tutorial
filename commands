@@ -1,0 +1,20 @@
+# With defautl network
+docker run -dit --name host1 test/net bash
+docker run -dit --name host2 test/net bash
+
+# With our net
+docker network create --driver=bridge --subnet=10.0.1.0/24 --gateway=10.0.1.1 our-net
+docker run -dit --network=our-net --name host1 test/net bash
+docker run -dit --network=our-net --name host2 test/net bash
+
+
+# My Web
+docker run -d -p 9009:80 --name my-web nginx
+
+docker build -t test/nginx .
+docker run -d -e msg="something else" -p 9009:80 --name my-web test/nginx
+
+# Cleanup
+docker ps | awk '{print $1}' | xargs docker stop
+docker container ls -a | awk '{print $1}' | xargs docker container rm
+docker network rm our-net
