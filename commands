@@ -18,3 +18,8 @@ docker run -d -e msg="something else" -p 9009:80 --name my-web test/nginx
 docker ps | awk '{print $1}' | xargs docker stop
 docker container ls -a | awk '{print $1}' | xargs docker container rm
 docker network rm our-net
+
+# commands
+docker network ls
+docker exec -it host1 bash
+docker network connect bridge host1

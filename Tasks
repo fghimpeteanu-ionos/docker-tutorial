@@ -1,0 +1,13 @@
+1. Make the nginx custom image return a custom message when we do from outside
+the container:
+  curl localhost:9009
+
+2. Create the setup with
+  - one container being a loadbalancer (using ha-proxy)
+  - 3 container being webservers (using nginx)
+  - each webserver should return a different message when querried:
+    - "Hello from DB"
+    - "Hello from Facebook"
+    - "Hello from Twitter"
+  - when I do a get on the loadbalacer from outside the container I should
+    receive a different message (e.g. configure ha-proxy to use round-robin alg.)
