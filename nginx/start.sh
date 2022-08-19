@@ -1,3 +1,4 @@
-#!/usr/bin/env bash
-echo $1 > /usr/share/nginx/html/index.html
-service nginx start
+#!/bin/bash
+echo "$MSG" > /usr/share/nginx/html/index.html
+cat /usr/share/nginx/html/index.html
+/docker-entrypoint.sh nginx -g "daemon off;"

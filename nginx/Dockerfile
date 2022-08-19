@@ -1,4 +1,5 @@
 FROM nginx:latest
-ENV msg="Hello peeps"
-COPY start.sh /app/start.sh
-CMD ["bash", "/app/start.sh", "$msg"]
+COPY start.sh /start.sh
+ENV MSG="Default Message"
+RUN apt-get update && apt-get install -y vim curl procps
+ENTRYPOINT [ "bash", "/start.sh" ]
