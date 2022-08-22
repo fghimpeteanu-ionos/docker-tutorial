@@ -1,0 +1,47 @@
+version: "3.9"
+services:
+  test:
+    image: hello-world
+    networks:
+      - our-net
+    container_name: test
+
+  my-db:
+    build: ./nginx
+    container_name: my-db
+    environment:
+      - MSG="Hello from DB"
+    networks:
+      - our-net
+
+  my-facebook:
+    build: ./nginx
+    container_name: my-facebook
+    environment:
+      - MSG="Hello from Facebook"
+    networks:
+      - our-net
+
+  my-twitter:
+    build: ./nginx
+    container_name: my-twitter
+    environment:
+      - MSG="Hello from Twitter"
+    networks:
+      - our-net
+
+  loadbalancer:
+    build: ./haproxy
+    container_name: loadbalancer
+    ports:
+      - "9009:80"
+    networks:
+      - our-net
+
+networks:
+  our-net:
+    name: "our-net"
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.0.13.0/24
