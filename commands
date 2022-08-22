@@ -30,3 +30,7 @@ docker run -d --rm --network=our-net --name my-db -e MSG="Hello from DB" test/ng
 docker run -d --rm --network=our-net --name my-facebook -e MSG="Hello from Facebook" test/nginx
 docker run -d --rm --network=our-net --name my-twitter -e MSG="Hello from Twitter" test/nginx
 docker run -d --rm --network=our-net -p 9009:80 --name loadbalacer test/haproxy
+
+# docker compose commands
+docker compose up -d
+docker compose down
