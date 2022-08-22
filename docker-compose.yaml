@@ -1,10 +1,14 @@
 version: "3.9"
 services:
   test:
-    image: hello-world
+    image: nginx
     networks:
       - our-net
     container_name: test
+    volumes:
+      - type: volume
+        source: html
+        target: /usr/share/nginx/html
 
   my-db:
     build: ./nginx
@@ -37,6 +41,9 @@ services:
       - "9009:80"
     networks:
       - our-net
+
+volumes:
+  html:
 
 networks:
   our-net:
